@@ -1,4 +1,4 @@
-a/acc_data.json
-a/acc_data.csv
+a/acc_data*
 a/.idea
 json_to_csv/.idea
+a/.vscode

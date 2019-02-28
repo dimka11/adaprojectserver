@@ -3,18 +3,21 @@ const http = require('http')
 const fs = require('fs');
 const port = 8080
 
+var dateToStr = require('./dateToStr');
+filename = "acc_data_" + dateToStr.getStringDate() + ".json"
+
 const requestHandler = (request, response) => {
   console.log(request.url)
   request.on('data', function (data) {
     console.log(JSON.parse(data))
 
-    fs.appendFileSync("acc_data.json", data, function(err) {
+    fs.appendFileSync(filename, data, function(err) {
       if(err) {
           return console.log(err);
       }
   }); 
 
-  fs.appendFileSync("acc_data.json", " \n", function(err) {
+  fs.appendFileSync(filename, " \n", function(err) {
     if(err) {
         return console.log(err);
     }
