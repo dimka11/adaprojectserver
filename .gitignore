@@ -1,4 +1,5 @@
-a/acc_data*
+a/data
 a/.idea
 json_to_csv/.idea
 a/.vscode
+a/node_modules

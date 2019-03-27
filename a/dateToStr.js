@@ -9,7 +9,7 @@ function formatNum(num, separator) {
 
   module.exports = {
     getStringDate: function (){
-        date = new Date()
+        let date = new Date()
         date_time_string_replaced_separator = formatNum(date, '_')
         return date_time_string_replaced_separator
     }

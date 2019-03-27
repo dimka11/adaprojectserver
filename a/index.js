@@ -4,7 +4,7 @@ const fs = require('fs');
 const port = 8080
 
 var dateToStr = require('./dateToStr');
-filename = "acc_data_" + dateToStr.getStringDate() + ".json"
+filename = "data/" + "acc_data_" + dateToStr.getStringDate() + ".json"
 
 const requestHandler = (request, response) => {
   console.log(request.url)
