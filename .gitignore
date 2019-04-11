@@ -1,5 +1,5 @@
-a/data
-a/.idea
+*/data
+*/.idea
 json_to_csv/.idea
-a/.vscode
-a/node_modules
+*/.vscode
+*/node_modules
