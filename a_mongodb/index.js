@@ -3,6 +3,9 @@ var mongoUtil = require('./mongoUtil');
 
 let time_delta = 0
 
+let current_date = new Date().toDateString()
+let collection_name = "DataCollector" +  current_date
+
 mongoUtil.connectToServer((err) => {
   const requestHandler = (request, response) => {
     console.log(request.url)
@@ -11,7 +14,7 @@ mongoUtil.connectToServer((err) => {
       let json_object = JSON.parse(data)
       timeDelta(json_object.timestamp)
       var database = mongoUtil.getDb();
-      const collection = database.db().collection('DataCollector').insertOne(json_object, (err, result) => {
+      const collection = database.db().collection(collection_name).insertOne(json_object, (err, result) => {
       });
     })
     response.end('Accelerometer Data Write Node.js Server!')
