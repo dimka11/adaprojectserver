@@ -82,13 +82,13 @@ mongoose.connect('mongodb://localhost/AccData', { useNewUrlParser: true }, (err)
 (function repeatedConsoleLoggerAsync() {
   const util = require('util');
   fs.appendFile = util.promisify(fs.appendFile);
-   setInterval(async () => {
+  setInterval(async () => {
     console.log(requests_array.length);
     let err = await fs.appendFile("test.json", JSON.stringify(requests_array));
     if (err) console.log(err);
     requests_array = [];
   }, 1000)
-})();
+});
 
 /*
 const fsPromises = fs.promises;
