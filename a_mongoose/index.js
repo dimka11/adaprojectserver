@@ -1,5 +1,6 @@
 const http = require('http');
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 var accDataSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -9,14 +10,20 @@ var accDataSchema = mongoose.Schema({
 
 var accDataModel = mongoose.model("AccData", accDataSchema);
 let time_delta = 0
+    /**
+     * @type {Array}
+     */
+    let requests_array = [];
 
-mongoose.connect('mongodb://localhost/AccData', (err) => {
+mongoose.connect('mongodb://localhost/AccData', { useNewUrlParser: true }, (err) => {
 
   const requestHandler = (request, response) => {
-    console.log(request.url)
+    //console.log(request.url)
+
     request.on('data', function (data) {
-      console.log(JSON.parse(data));
+      //console.log(JSON.parse(data));
       let json_object = JSON.parse(data);
+      requests_array.push(json_object + "\n")
       timeDelta(json_object.timestamp);
       let newAccData = new accDataModel({
         _id: new mongoose.Types.ObjectId(),
@@ -28,7 +35,7 @@ mongoose.connect('mongodb://localhost/AccData', (err) => {
           console.log('error' + err);
           return;
         } 
-        console.log('successfully saved');
+        //console.log('successfully saved');
       });
 
     });
@@ -46,6 +53,20 @@ mongoose.connect('mongodb://localhost/AccData', (err) => {
   });
 });
 
+/**
+ * write to disk with 1 second interval
+ */
+(function repeatedConsoleLogger(){
+  setInterval(()=> {
+    console.log(requests_array.length);
+    fs.appendFile("test.json", JSON.stringify(requests_array),(err)=> {
+      if (err) console.log(err);
+      requests_array = []
+    })
+  }, 1000)
+})();
+
+
 process.on('SIGINT', function () {
   console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
   process.exit();
@@ -54,6 +75,6 @@ process.on('SIGINT', function () {
 function timeDelta(timestamp) {
   let delta = timestamp - time_delta;
   let time = new Date(delta);
-  console.log("refresh rate: " + 1000 / delta);
+  //console.log("refresh rate: " + 1000 / delta);
   time_delta = timestamp;
 }
