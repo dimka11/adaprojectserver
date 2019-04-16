@@ -53,6 +53,7 @@ mongoose.connect('mongodb://localhost/AccData', { useNewUrlParser: true }, (err)
   });
 });
 
+
 /**
  * write to disk with 1 second interval
  */
@@ -111,6 +112,6 @@ process.on('SIGINT', function () {
 function timeDelta(timestamp) {
   let delta = timestamp - time_delta;
   let time = new Date(delta);
-  //console.log("refresh rate: " + 1000 / delta);
+  console.log("refresh rate: " + 1000 / delta);
   time_delta = timestamp;
 }

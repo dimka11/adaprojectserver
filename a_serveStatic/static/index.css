@@ -14,3 +14,13 @@ a:visited{
 .list {
     color: darkslategray
 }
+
+.viz {
+    max-height: 200px;
+    max-width: 300px;
+}
+
+.graph {
+    max-height: 600px;
+    max-width: 900px;
+}
