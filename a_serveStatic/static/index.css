@@ -21,6 +21,13 @@ a:visited{
 }
 
 .graph {
-    max-height: 600px;
-    max-width: 900px;
+    /* not working (((! */
+    display: inline;
+    position: relative;
+    max-height: 300px;
+    max-width: 600px;
+}
+
+.list_of_buttons {
+
 }
