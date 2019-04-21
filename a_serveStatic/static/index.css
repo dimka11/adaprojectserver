@@ -21,7 +21,6 @@ a:visited{
 }
 
 .graph {
-    /* not working (((! */
     display: inline;
     position: relative;
     max-height: 300px;

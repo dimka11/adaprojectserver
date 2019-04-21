@@ -1,9 +1,10 @@
+/*
 function d3_chart() {
   // sample data array
   // instantiate d3plus
   var visualization = d3plus.viz()
     .container("#viz")  // container DIV to hold the visualization
-    .data("./extra/acc.csv", { "filetype": "csv" })  // data to use with the visualization
+    .data(filenames_array[0], { "filetype": "csv" })  // data to use with the visualization
     .id('y')
     .type("line")       // visualization type
     .y("x")         // key to use for y-axis
@@ -11,11 +12,12 @@ function d3_chart() {
     .resize(true)          // key to use for x-axis
     .draw()             // finally, draw the visualization!
 }
+*/
 
-function plotly_chart() {
+function plotly_chart(file_path) {
   var legend = ['x', 'y', 'z']
 
-  Plotly.d3.csv('./extra/acc.csv', (err, rows) => {
+  Plotly.d3.csv(file_path, (err, rows) => {
 
     var data = legend.map(y => {
       var d = rows
@@ -32,8 +34,8 @@ function plotly_chart() {
   })
 }
 
-function plotly_basic() {
-  Plotly.d3.csv('./extra/acc.csv', function(err, rows){
+function plotly_basic(file_path) {
+  Plotly.d3.csv(file_path, function(err, rows){
     function unpack(rows, key) {
       return rows.map(function(row) {return row[key]; });
     }
