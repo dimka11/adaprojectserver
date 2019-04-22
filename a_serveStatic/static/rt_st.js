@@ -1,6 +1,7 @@
+let UPD_RATE = 100;
 var lineArr = [];
-    var MAX_LENGTH = 10;
-    var duration = 500;
+    var MAX_LENGTH = 2;
+    var duration = 1000;
     var chart = realTimeLineChart();
 
     async function getData() {
@@ -68,7 +69,7 @@ var lineArr = [];
 
     document.addEventListener("DOMContentLoaded", function() {
       seedData();
-      window.setInterval(updateData, 250);
+      window.setInterval(updateData, UPD_RATE);
       d3.select("#chart").datum(lineArr).call(chart);
       d3.select(window).on('resize', resize);
     });
