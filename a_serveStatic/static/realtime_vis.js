@@ -1,5 +1,5 @@
 let current_value = 0;
-let update_timeout = 100;
+let update_timeout = 300;
 
 document.addEventListener('DOMContentLoaded', () => {
   let graph_div = document.getElementById('graph');
