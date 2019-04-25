@@ -10,9 +10,15 @@ var jsonToStr = require('./jsonToStr')
 let realTimeData;
 let PORT = 8080;
 
-filename = "data/" + "acc_data_" + dateToStr.getStringDate() + ".csv";
+let filename = "data/" + "acc_data_" + dateToStr.getStringDate() + ".csv";
+
 //fs.appendFileSync(filename, 'timestamp,x,y,z \n', (err) => { if (err) console.log('error happend') }) // with timestamp 
-fs.appendFileSync(filename, 'x,y,z \n', (err) => { if (err) console.log('error happend') });
+fs.open(filename, "wx", function (err, fd) {
+  // handle error
+  fs.close(fd, function (err) {
+      // handle error
+  });
+});
 
 const server = http.createServer((request, response) => {
   console.log('request was sent ' + request.url);
