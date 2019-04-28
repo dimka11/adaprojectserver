@@ -31,7 +31,7 @@ http.createServer((req, res) => {
     form.parse(req, function (err, fields, files) {
       if (err) throw err;
       var oldpath = files.file.path;
-      var newpath = 'C:/VSI/' + files.file.name;
+      var newpath = uploadedFilesFolder + files.file.name;
       fs.rename(oldpath, newpath, function (err) {
         //if (err) throw err;
         //res.write('File uploaded and moved!');
@@ -53,6 +53,16 @@ http.createServer((req, res) => {
         res.end();
       });
     }).on('error', () => 'error happend');
+  }
+
+  else if (req.url === '/getUploadForm') {
+    console.log(req.rawHeaders)
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="file"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
   }
 
   else if (req.url === '/putDataCSV') {
@@ -88,6 +98,7 @@ http.createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end(json);
   }
+
   else {
     return handler(req, res,
       {
